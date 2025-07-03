@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./FastAPI
+      dockerfile: docker/Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./FastAPI/app:/app
+    environment:
+      - WATCHFILES_FORCE_POLLING=true
+
+  frontend:
+    build:
+      context: ./my-vue-app
+      dockerfile: docker/Dockerfile
+    ports:
+      - "8080:80"
+    volumes:
+      - ./my-vue-app/src:/app/src
